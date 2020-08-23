@@ -1,6 +1,6 @@
 //Title
 var html_title;
-try{
+try {
 	html_title = document.querySelector('h1.title').innerText;
 }catch(err){
 	html_title = document.querySelector('h2.special-article-heading').innerText;
@@ -87,8 +87,14 @@ finalHTML += '<title>' + html_title_head + '</title>';
 finalHTML += '<style>'
 finalHTML += 'a {color:grey;text-decoration: none;}'
 finalHTML += '</style>'
+
+finalHTML += '<style>'
+finalHTML += '.dark-mode { background-color: black; color: white; }'
+finalHTML += '</style>'
+
 finalHTML += '</head>'
 
+finalHTML += '<button style="position: fixed;" onclick="enableDM()">Dark Mode</button>';
 
 finalHTML += '<div style="width:800px; margin:0 auto; font-size:20px;">';
 finalHTML += html_title;
@@ -102,3 +108,17 @@ finalHTML += '</div>';
 
 document.documentElement.innerHTML = '';
 document.documentElement.innerHTML += finalHTML;
+
+// DarkMode Function
+var script = document.createElement('script');
+script.type = "text/javascript";
+var innerScript = document.createTextNode(`
+	function enableDM() {
+		var element = document.body;
+		element.classList.toggle("dark-mode");
+	}
+`);
+script.appendChild(innerScript);
+document.body.appendChild(script);
+
+
